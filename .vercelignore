@@ -1,0 +1,7 @@
+node_modules
+.DS_Store
+*.log
+references/
+design.md
+Screenshot*.png
+

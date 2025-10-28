@@ -1,0 +1,13 @@
+{
+  "name": "sncw-home",
+  "version": "1.0.0",
+  "description": "성남청운교회 웹사이트",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "start": "python3 -m http.server 8000"
+  },
+  "keywords": ["church", "website"],
+  "author": "성남청운교회",
+  "license": "MIT"
+}
+
