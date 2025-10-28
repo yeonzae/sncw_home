@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
 body {
     font-family: 'Roboto', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     overflow-x: hidden;
@@ -83,6 +88,37 @@ body {
 
 .nav-link:hover::after {
     width: 100%;
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+}
+
+.hamburger-line {
+    width: 25px;
+    height: 2px;
+    background-color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburger-menu.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
 }
 
 /* Hero Section */
@@ -178,6 +214,8 @@ body {
     opacity: 0.95;
     line-height: 1.6;
     color: white;
+    font-style: italic;
+
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
@@ -201,7 +239,10 @@ body {
 }
 
 .btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     padding: 1rem 2rem;
     text-decoration: none;
     border-radius: 50px;
@@ -211,6 +252,12 @@ body {
     border: 2px solid transparent;
     min-width: 180px;
     text-align: center;
+}
+
+.btn-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
 }
 
 .btn-primary {
@@ -276,6 +323,10 @@ body {
 
 /* Mobile Navigation */
 @media (max-width: 768px) {
+    html {
+        scroll-padding-top: 70px;
+    }
+    
     .navbar {
         padding: 0 1rem;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
@@ -289,23 +340,50 @@ body {
         height: 32px;
     }
     
-    .nav-menu {
-        gap: 0.6rem;
-        overflow-x: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
+    /* Show hamburger menu on mobile */
+    .hamburger-menu {
+        display: flex;
     }
     
-    .nav-menu::-webkit-scrollbar {
-        display: none;
+    /* Hide nav menu by default on mobile */
+    .nav-menu {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background-color: transparent;
+        backdrop-filter: none;
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+        box-shadow: none;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    }
+    
+    .nav-menu.active {
+        max-height: 300px;
+        padding: 1rem 0;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        background-color: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
     }
     
     .nav-link {
-        font-size: 0.8rem;
-        white-space: nowrap;
-        padding: 0.3rem 0.6rem;
-        border-radius: 20px;
-        transition: background-color 0.3s ease;
+        font-size: 0.95rem;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        text-align: left;
+        width: 100%;
+    }
+    
+    .nav-link:last-child {
+        border-bottom: none;
+    }
+    
+    .nav-link::after {
+        display: none;
     }
     
     .nav-link:hover {
@@ -326,7 +404,7 @@ body {
     }
     
     .headline {
-        font-size: clamp(1.6rem, 7vw, 2.2rem);
+        font-size: clamp(1.45rem, 6.5vw, 2.05rem);
         margin-bottom: 1.2rem;
         line-height: 1.3;
         letter-spacing: -0.01em;
@@ -366,6 +444,29 @@ body {
     .scroll-text {
         font-size: 0.8rem;
     }
+    
+    /* Schedule Mobile */
+    .schedule-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .schedule-label {
+        font-size: 0.75rem;
+    }
+    
+    .schedule-title {
+        font-size: clamp(1.6rem, 6vw, 2rem);
+        margin-bottom: 2.5rem;
+    }
+    
+    .campus-title {
+        font-size: 1.3rem;
+    }
+    
+    .campus-description {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
 }
 
 /* Tablet optimization */
@@ -377,12 +478,107 @@ body {
     .nav-menu {
         gap: 1.5rem;
     }
+    
+    .schedule-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .schedule-card {
+        padding: 2.5rem 2rem;
+    }
 }
 
-/* Info Section */
-.info-section {
+/* Vision Statement Section */
+.vision-statement-section {
     padding: 4rem 2rem;
-    background-color: #ffffff;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e3e8ef 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.vision-statement-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(52, 152, 219, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.vision-statement-section::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(155, 89, 182, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.vision-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.vision-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #3498db;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.vision-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 300;
+    color: #2c3e50;
+    margin-bottom: 1.2rem;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+}
+
+.vision-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: #485765;
+    line-height: 1.6;
+    font-weight: 400;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.vision-about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.vision-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.vision-description strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* Church Info Section - Bethel Schedule Style */
+.church-info-section {
+    padding: 4rem 2rem;
+    background-color: #f5f5f5;
 }
 
 .container {
@@ -390,40 +586,105 @@ body {
     margin: 0 auto;
 }
 
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.info-card {
-    text-align: center;
-    padding: 2rem 1.5rem;
-    background-color: #f8f9fa;
-    border-radius: 12px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.info-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.info-card h3 {
-    font-size: 1.3rem;
-    font-weight: 500;
+.schedule-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #3498db;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     margin-bottom: 1rem;
-    color: #2c3e50;
+    display: block;
 }
 
-.info-card p {
-    color: #5a6c7d;
-    line-height: 1.6;
+.schedule-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.2rem);
+    font-weight: 300;
+    color: #2c3e50;
+    margin-bottom: 2.5rem;
+    text-align: left;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.schedule-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 1400px;
+}
+
+.schedule-card {
+    background: #ffffff;
+    padding: 3rem 2.5rem;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.campus-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+}
+
+.campus-description {
     font-size: 1rem;
+    color: #5a6c7d;
+    margin-bottom: 2rem;
+}
+
+.location-info {
+    margin-bottom: 2.5rem;
+}
+
+.location-info p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.service-times {
+    margin-bottom: 2rem;
+}
+
+.service-times h4 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #2c3e50;
+    margin-bottom: 0.75rem;
+}
+
+.time-list {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.time {
+    font-size: 1rem;
+    color: #555;
+}
+
+.time-description {
+    font-size: 1rem;
+    color: #555;
+    margin: 0;
+    line-height: 1.8;
+}
+
+.contact-info {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.contact-info p {
+    font-size: 1rem;
+    color: #555;
+    margin: 0.5rem 0;
+    line-height: 1.6;
 }
 
 /* Large screen optimization */
@@ -452,8 +713,94 @@ body {
 
 /* About Section */
 .about-section {
-    padding: 5rem 2rem;
-    background-color: #f8f9fa;
+    padding: 4rem 2rem;
+    background-color: #ffffff;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-text-content {
+    padding-right: 2rem;
+}
+
+.about-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #3498db;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.about-heading {
+    font-size: clamp(1.8rem, 3.5vw, 2.2rem);
+    font-weight: 300;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.about-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.about-description strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.about-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.about-image-content {
+    position: relative;
+}
+
+.about-image-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.about-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.about-image-wrapper:hover .about-image {
+    transform: scale(1.05);
+}
+
+.about-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.1) 100%
+    );
+    pointer-events: none;
 }
 
 /* Desktop layout improvements */
@@ -470,193 +817,197 @@ body {
         max-width: 1000px;
     }
     
-    .values-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
     .prayer-grid {
         grid-template-columns: repeat(3, 1fr);
     }
     
-    .value-item:nth-child(5) {
-        grid-column: 2 / 3;
+    .schedule-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
     }
 }
 
-.section-header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.section-header h2 {
-    font-size: 2.5rem;
-    font-weight: 300;
-    color: #2c3e50;
-    margin-bottom: 1rem;
-}
-
-.section-header p {
-    font-size: 1.2rem;
-    color: #5a6c7d;
-    opacity: 0.8;
-}
-
-.about-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.church-intro h3 {
-    font-size: 1.8rem;
-    color: #2c3e50;
-    margin-bottom: 1.5rem;
-    font-weight: 500;
-}
-
-.church-intro p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #555;
-    margin-bottom: 1.5rem;
-}
 
 
-/* Accordion Section */
-.accordion-section {
-    padding: 5rem 2rem;
-    background-color: #ffffff;
-}
-
-.accordion-wrapper {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.accordion-item {
-    background-color: white;
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+/* Tabbed Section */
+.tabbed-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    position: relative;
     overflow: hidden;
-    border: 1px solid #f1f3f4;
 }
 
-.accordion-header {
+.tabbed-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('image.png') center/cover no-repeat;
+    opacity: 0.08;
+    pointer-events: none;
+}
+
+.tab-buttons {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.8rem 2rem;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab-button {
+    padding: 1rem 2rem;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1rem;
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
-    border-bottom: 1px solid transparent;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
 }
 
-.accordion-header:hover {
-    background-color: #f8f9fa;
+.tab-button:hover {
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.05);
 }
 
-.accordion-header.active {
-    background-color: #f8f9fa;
-    border-bottom-color: #e9ecef;
+.tab-button.active {
+    color: #ffffff;
+    border-bottom-color: #3498db;
 }
 
-.accordion-header h3 {
-    font-size: 1.3rem;
-    font-weight: 500;
-    color: #2c3e50;
-    margin: 0;
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease;
+    position: relative;
+    z-index: 1;
 }
 
-.accordion-icon {
-    font-size: 1.3rem;
-    font-weight: 400;
-    color: #2c3e50;
-    transition: transform 0.3s ease;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.tab-content.active {
+    display: block;
 }
 
-.accordion-header.active .accordion-icon {
-    transform: rotate(45deg);
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-}
-
-.accordion-inner {
-    padding: 2rem;
-    background-color: #fafbfc;
-}
-
-/* Mission Grid in Accordion */
-.mission-grid {
+.motto-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.mission-item {
-    padding: 1.8rem;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    border-left: 3px solid #2c3e50;
-}
-
-.mission-item h4 {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: #2c3e50;
-    margin-bottom: 1rem;
-    line-height: 1.4;
-}
-
-.mission-item p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #555;
-}
-
-/* Values Grid in Accordion */
-.values-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-}
-
-.value-item {
-    padding: 1.8rem 1.5rem;
-    background-color: white;
-    border-radius: 10px;
+.motto-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 3rem 2rem;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-.value-item:hover {
-    transform: translateY(-3px);
+.motto-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(52, 152, 219, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
-.value-item h4 {
-    font-size: 1.2rem;
+.motto-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.motto-card-title {
+    font-size: 1.5rem;
     font-weight: 500;
-    color: #2c3e50;
+    color: #ffffff;
     margin-bottom: 1rem;
+    line-height: 1.3;
 }
 
-.value-item p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: #555;
+.motto-card-description {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
 }
 
-/* Prayer Grid in Accordion */
+.core-values-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.core-value-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.core-value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border-color: rgba(52, 152, 219, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.core-value-card.centered {
+    grid-column: 1 / -1;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.value-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.15);
+    line-height: 1;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+}
+
+.core-value-card:hover .value-number {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.value-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.value-description {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+}
+
 .prayer-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -665,124 +1016,158 @@ body {
 
 .prayer-item {
     padding: 1.8rem 1.5rem;
-    background-color: white;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .prayer-item:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border-color: rgba(52, 152, 219, 0.3);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .prayer-item h4 {
     font-size: 1.1rem;
     font-weight: 500;
-    color: #2c3e50;
+    color: #ffffff;
     margin-bottom: 1rem;
 }
 
 .prayer-item p {
     font-size: 0.95rem;
     line-height: 1.6;
-    color: #555;
+    color: rgba(255, 255, 255, 0.85);
 }
 
-    /* Info Cards Mobile */
-    .info-section {
-        padding: 2.5rem 1rem;
+/* Mobile specific styles - Additional */
+@media (max-width: 768px) {
+    .about-label {
+        font-size: 0.75rem;
     }
     
-    .info-grid {
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
-    }
-    
-    .info-card {
-        padding: 1.8rem 1.2rem;
-        border-radius: 10px;
-    }
-    
-    .info-card h3 {
-        font-size: 1.2rem;
-        margin-bottom: 0.8rem;
-    }
-    
-    .info-card p {
-        font-size: 0.95rem;
-        line-height: 1.5;
-    }
-    
-    /* About Section Mobile */
-    .about-section {
-        padding: 2.5rem 1rem;
-    }
-    
-    .section-header h2 {
+    .about-heading {
         font-size: clamp(1.6rem, 6vw, 2rem);
-        margin-bottom: 0.8rem;
+        margin-bottom: 1.5rem;
     }
     
-    .section-header p {
+    .about-description {
         font-size: 1rem;
-        line-height: 1.5;
-        margin-bottom: 2rem;
-    }
-    
-    .church-intro p {
-        font-size: 0.95rem;
-        line-height: 1.6;
+        line-height: 1.7;
         margin-bottom: 1.2rem;
     }
     
-    
-    /* Accordion Section Mobile */
-    .accordion-section {
-        padding: 2.5rem 1rem;
+    .about-buttons {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-top: 2rem;
     }
     
-    .accordion-header {
-        padding: 1.2rem 1.5rem;
+    .about-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
     }
     
-    .accordion-header h3 {
-        font-size: 1.2rem;
+    .about-image-wrapper {
+        border-radius: 8px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
     }
     
-    .accordion-icon {
+    
+    /* Community Motto Mobile */
+    .tabbed-section {
+        padding: 3.5rem 1.5rem;
+    }
+    
+    .tab-buttons {
+        flex-wrap: wrap;
+        gap: 0;
+        margin-bottom: 2rem;
+    }
+    
+    .tab-button {
+        flex: 1 1 auto;
+        padding: 0.9rem 0.8rem;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+    
+    .tab-button.active {
+        background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .motto-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .motto-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .motto-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .motto-card-title {
         font-size: 1.3rem;
     }
     
-    .accordion-inner {
-        padding: 1.5rem;
+    .motto-card-description {
+        font-size: 0.95rem;
+        line-height: 1.6;
     }
     
-    .mission-grid, .values-grid, .prayer-grid {
+    .core-values-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .core-value-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .core-value-card.centered {
+        max-width: 100%;
+    }
+    
+    .value-number {
+        font-size: 2.5rem;
+    }
+    
+    .value-title {
+        font-size: 1.3rem;
+    }
+    
+    .value-description {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    .prayer-grid {
         grid-template-columns: 1fr;
         gap: 1.2rem;
     }
     
-    .mission-item, .value-item, .prayer-item {
+    .prayer-item {
         padding: 1.2rem;
-    }
-    
-    .mission-item h4, .value-item h4 {
-        font-size: 1.1rem;
     }
     
     .prayer-item h4 {
         font-size: 1rem;
     }
     
-    .mission-item p, .value-item p, .prayer-item p {
+    .prayer-item p {
         font-size: 0.85rem;
     }
     
     /* Touch Interactions */
-    .info-card:active,
-    .mission-item:active,
-    .value-item:active,
     .prayer-item:active {
         transform: scale(0.98);
         transition: transform 0.1s ease;
@@ -796,7 +1181,7 @@ body {
 /* Small Mobile Devices */
 @media (max-width: 480px) {
     .headline {
-        font-size: clamp(1.4rem, 8vw, 1.8rem);
+        font-size: clamp(1.25rem, 7.5vw, 1.65rem);
         margin-bottom: 1rem;
     }
     
@@ -820,6 +1205,11 @@ body {
         font-size: 0.9rem;
     }
     
+    .tab-button {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.75rem;
+    }
+    
     .section-header h2 {
         font-size: clamp(1.4rem, 7vw, 1.8rem);
     }
@@ -828,9 +1218,26 @@ body {
         font-size: 0.9rem;
     }
     
-    .info-card,
-    .mission-item,
-    .value-item,
+    .schedule-label {
+        font-size: 0.7rem;
+    }
+    
+    .schedule-title {
+        font-size: clamp(1.4rem, 7vw, 1.8rem);
+    }
+    
+    .schedule-card {
+        padding: 1.5rem 1.2rem;
+    }
+    
+    .campus-title {
+        font-size: 1.2rem;
+    }
+    
+    .service-times h4 {
+        font-size: 1rem;
+    }
+    
     .prayer-item {
         padding: 1.4rem 1rem;
     }
