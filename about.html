@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교회소개 - 성남청운교회</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('navMenu');
+            const hamburger = document.querySelector('.hamburger-menu');
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const navMenu = document.getElementById('navMenu');
+            const hamburger = document.querySelector('.hamburger-menu');
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <img src="sncw_logo.png" alt="성남청운교회 로고" class="logo-img">
+                </a>
+            </div>
+            <button class="hamburger-menu" onclick="toggleMobileMenu()" aria-label="메뉴 열기">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link" onclick="closeMobileMenu()">홈</a>
+                <a href="about.html" class="nav-link active" onclick="closeMobileMenu()">교회소개</a>
+                <a href="worship.html" class="nav-link" onclick="closeMobileMenu()">예배</a>
+                <a href="training.html" class="nav-link" onclick="closeMobileMenu()">양육</a>
+                <a href="ministry.html" class="nav-link" onclick="closeMobileMenu()">사역</a>
+                <a href="mission.html" class="nav-link" onclick="closeMobileMenu()">선교</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero about-hero">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h6 class="page-hero-label">ABOUT US</h6>
+            <h1 class="page-hero-title">교회소개</h1>
+            <p class="page-hero-subtitle">성남청운교회를 소개합니다</p>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section class="content-section vision-values-section">
+        <div class="container">
+            <div class="section-header-center">
+                <h6 class="section-label">OUR VISION</h6>
+                <h2 class="section-title">성남청운교회는</h2>
+                <p class="section-description">
+                    큰 교회가 목적이 아닌 <strong>작지만 강한 공동체</strong><br><br>
+                    그 옛날 모라비안교도들과 같이<br><strong>복음적인 삶을 살아냄으로</strong><br><strong>지역을 변화시키는 공동체</strong><br><br>
+                    예배적인 삶을 통해 <br><strong>복음의 영광을 드러내는 공동체</strong>를<br> 추구합니다.
+                </p>
+            </div>
+
+            <!-- 3대 공동체 모토 -->
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🙏</div>
+                    <h3 class="value-card-title">예배공동체</h3>
+                    <p class="value-card-description">하나님께서 임재하시는 예배공동체. 살아있는 예배를 통해 하나님께 영광을 돌리며, 예배적인 삶으로 복음의 영광을 드러냅니다.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🤲</div>
+                    <h3 class="value-card-title">기도공동체</h3>
+                    <p class="value-card-description">하나님께서 역사하시는 기도공동체. 기도의 능력을 믿으며, 개인과 가정, 지역사회와 열방을 위해 쉬지 않고 기도합니다.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🌍</div>
+                    <h3 class="value-card-title">선교공동체</h3>
+                    <p class="value-card-description">하나님께서 확장하시는 선교공동체. 복음의 능력으로 작지만 강한 공동체가 되어 지역을 변화시키고 열방에 복음을 전합니다.</p>
+                </div>
+            </div>
+
+            <!-- 5대 핵심가치 -->
+            <div class="section-divider"></div>
+            <div class="section-header-center">
+                <h6 class="section-label">CORE VALUES</h6>
+                <h2 class="section-title">5대 핵심가치</h2>
+            </div>
+            <div class="core-values-grid-about">
+                <div class="core-value-item">
+                    <div class="value-number-large">01</div>
+                    <h4 class="value-title-large">복음</h4>
+                    <p class="value-description-large">예수 그리스도의 십자가와 부활의 복음이 우리 삶의 중심입니다</p>
+                </div>
+                <div class="core-value-item">
+                    <div class="value-number-large">02</div>
+                    <h4 class="value-title-large">공동체</h4>
+                    <p class="value-description-large">서로 사랑하고 돌보며 함께 성장하는 그리스도의 몸을 이룹니다</p>
+                </div>
+                <div class="core-value-item">
+                    <div class="value-number-large">03</div>
+                    <h4 class="value-title-large">가정</h4>
+                    <p class="value-description-large">하나님이 세우신 가정을 회복하고 다음세대에 신앙을 전수합니다</p>
+                </div>
+                <div class="core-value-item">
+                    <div class="value-number-large">04</div>
+                    <h4 class="value-title-large">다음세대</h4>
+                    <p class="value-description-large">어린이와 청소년들이 하나님의 꿈을 품고 성장할 수 있도록 돕습니다</p>
+                </div>
+                <div class="core-value-item">
+                    <div class="value-number-large">05</div>
+                    <h4 class="value-title-large">문화선교</h4>
+                    <p class="value-description-large">복음적인 문화를 창조하고 나누어 세상에 하나님 나라의 영향력을 끼칩니다</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pastor Greeting Section -->
+    <section class="content-section pastor-section">
+        <div class="container">
+            <div class="section-header-left">
+                <h6 class="section-label">PASTOR'S GREETING</h6>
+                <h2 class="section-title">담임목사 인사말</h2>
+            </div>
+            <div class="two-column-layout">
+                <div class="pastor-image-content">
+                    <div class="pastor-image-wrapper-about">
+                        <img src="pastor.png" alt="담임목사" class="pastor-image-about">
+                    </div>
+                    <div class="pastor-info">
+                        <h3 class="pastor-name">홍길동 목사</h3>
+                        <p class="pastor-title">담임목사</p>
+                    </div>
+                </div>
+                <div class="pastor-text-content">
+                    <div class="greeting-text">
+                        <p>사랑하는 성도 여러분, 그리고 저희 교회를 방문해주신 모든 분들께 주님의 이름으로 환영합니다.</p>
+                        
+                        <p>성남청운교회는 <strong>작지만 강한 공동체</strong>를 추구합니다. 큰 교회가 목적이 아닌, 그 옛날 모라비안교도들처럼 복음적인 삶을 살아내며 지역을 변화시키는 공동체가 되기를 원합니다.</p>
+                        
+                        <p>우리는 예배공동체, 기도공동체, 선교공동체로서 하나님의 영광을 드러내고자 합니다. 예배를 통해 하나님을 만나고, 기도로 하나님의 역사하심을 경험하며, 선교로 복음을 전하는 교회입니다.</p>
+                        
+                        <p>이 땅의 모든 민족이 복음을 듣고 하나님께 돌아오기를 소망하며, 한 영혼 한 영혼을 귀하게 여기는 교회가 되기를 기도합니다.</p>
+                        
+                        <p>함께 예배하고, 함께 기도하며, 함께 나아가는 성남청운교회가 되기를 소망합니다.</p>
+                        
+                        <p class="greeting-signature">성남청운교회 담임목사 홍길동</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Staff Section -->
+    <section class="content-section staff-section">
+        <div class="container">
+            <div class="section-header-center">
+                <h6 class="section-label">OUR TEAM</h6>
+                <h2 class="section-title">섬기는 사람들</h2>
+                <p class="section-subtitle">하나님의 부르심을 받아 성도들을 섬기는 사역자들입니다</p>
+            </div>
+            <div class="staff-grid">
+                <div class="staff-card">
+                    <div class="staff-image-placeholder">
+                        <span class="staff-placeholder-icon">👤</span>
+                    </div>
+                    <h3 class="staff-name">홍길동</h3>
+                    <p class="staff-role">담임목사</p>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-image-placeholder">
+                        <span class="staff-placeholder-icon">👤</span>
+                    </div>
+                    <h3 class="staff-name">김철수</h3>
+                    <p class="staff-role">부목사</p>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-image-placeholder">
+                        <span class="staff-placeholder-icon">👤</span>
+                    </div>
+                    <h3 class="staff-name">이영희</h3>
+                    <p class="staff-role">전도사</p>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-image-placeholder">
+                        <span class="staff-placeholder-icon">👤</span>
+                    </div>
+                    <h3 class="staff-name">박민수</h3>
+                    <p class="staff-role">장로</p>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-image-placeholder">
+                        <span class="staff-placeholder-icon">👤</span>
+                    </div>
+                    <h3 class="staff-name">최지혜</h3>
+                    <p class="staff-role">권사</p>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-image-placeholder">
+                        <span class="staff-placeholder-icon">👤</span>
+                    </div>
+                    <h3 class="staff-name">정수현</h3>
+                    <p class="staff-role">집사</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Contact Section -->
+    <section class="content-section location-section">
+        <div class="container">
+            <div class="section-header-center">
+                <h6 class="section-label">CONTACT</h6>
+                <h2 class="section-title">오시는 길 & 연락처</h2>
+            </div>
+            <div class="location-grid">
+                <!-- 성남청운교회 -->
+                <div class="location-card">
+                    <h3 class="location-church-name">성남청운교회</h3>
+                    <div class="map-wrapper">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3167.6843944444444!2d127.12345678!3d37.44444444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDI2JzQwLjAiTiAxMjfCsDA3JzI0LjQiRQ!5e0!3m2!1sko!2skr!4v1234567890"
+                            width="100%" 
+                            height="300" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <h4>주소</h4>
+                            <p>경기 성남시 중원구 둔촌대로 226</p>
+                        </div>
+                        <div class="contact-item">
+                            <h4>전화</h4>
+                            <p>031-1234-5678</p>
+                        </div>
+                        <div class="contact-item">
+                            <h4>이메일</h4>
+                            <p>info@sncw.or.kr</p>
+                        </div>
+                        <div class="contact-item">
+                            <h4>교통편</h4>
+                            <p>지하철 8호선 상남역 3번 출구<br>버스 123, 456번</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 제주청운교회 -->
+                <div class="location-card">
+                    <h3 class="location-church-name">제주청운교회</h3>
+                    <div class="map-wrapper">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3333.8888888888!2d126.55555555!3d33.33333333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDIwJzAwLjAiTiAxMjbCsDMzJzIwLjAiRQ!5e0!3m2!1sko!2skr!4v1234567890"
+                            width="100%" 
+                            height="300" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <h4>주소</h4>
+                            <p>제주특별자치도 서귀포시 효돈로 214 2층</p>
+                        </div>
+                        <div class="contact-item">
+                            <h4>전화</h4>
+                            <p>064-1234-5678</p>
+                        </div>
+                        <div class="contact-item">
+                            <h4>이메일</h4>
+                            <p>jeju@sncw.or.kr</p>
+                        </div>
+                        <div class="contact-item">
+                            <h4>교통편</h4>
+                            <p>서귀포 시내버스 이용<br>효돈초등학교 인근</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="sncw_logo.png" alt="성남청운교회" class="footer-logo-img">
+                    <p class="footer-church-name">성남청운교회</p>
+                </div>
+                <div class="footer-info">
+                    <p>경기 성남시 중원구 둔촌대로 226 | 제주특별자치도 서귀포시 효돈로 214 2층</p>
+                    <p>Tel: 031-1234-5678 | Email: info@sncw.or.kr</p>
+                    <p class="footer-copyright">© 2025 성남청운교회. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
